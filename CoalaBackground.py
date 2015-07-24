@@ -28,3 +28,9 @@ class CoalaBackground(sublime_plugin.EventListener):
 
                 if view.get_status(COALA_KEY) and not found_result_flag:
                     view.erase_status(COALA_KEY)
+
+    def on_post_save(self, view):
+        """
+        Run coala when the file is saved.
+        """
+        view.run_command('coala')

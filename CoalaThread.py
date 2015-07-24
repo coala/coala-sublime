@@ -4,6 +4,8 @@ import threading
 import sublime
 import tempfile
 import subprocess
+import datetime
+import time
 
 from .Utils import log, COALA_KEY
 
@@ -42,6 +44,15 @@ class CoalaThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+        running = self.view.settings().get(COALA_KEY + ".running", False)
+        now = time.time()
+        timeout_seconds = datetime.timedelta(minutes=2).total_seconds()
+        if running and now - running < timeout_seconds:
+            log("Earler coala thread still running since", running,
+                "for", now - running)
+            return
+
+        self.view.settings().set(COALA_KEY + ".running", now)
         command = ["coala-json"]
         options = []
 
@@ -80,6 +91,7 @@ class CoalaThread(threading.Thread):
         else:
             log("Exited with:", retval)
         stdout_file.close()
+        self.view.settings().set(COALA_KEY + ".running", False)
 
     def process_output(self, output_str):
         view_id = self.view.id()
