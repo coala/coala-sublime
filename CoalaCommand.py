@@ -1,10 +1,7 @@
 import sublime_plugin
 import sublime
 from .CoalaThread import CoalaThread
-from .Utils import log
-
-
-COALA_KEY = "coala-sublime"
+from .Utils import log, COALA_KEY
 
 
 def show_output(view, output):

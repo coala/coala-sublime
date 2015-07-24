@@ -4,5 +4,8 @@ by the other classes.
 """
 
 
+COALA_KEY = "coala-sublime"
+
+
 def log(*args, **kwargs):
     print(" COALA -", *args, **kwargs)
