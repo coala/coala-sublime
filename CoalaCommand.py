@@ -4,6 +4,23 @@ from .CoalaThread import CoalaThread
 from .Utils import log
 
 
+COALA_KEY = "coala-sublime"
+
+
+def show_output(view, output):
+    region_flag = sublime.DRAW_OUTLINED
+    regions = []
+
+    for section_name, section_results in output["results"].items():
+        for result in section_results:
+            if not isinstance(result["line_nr"], int):
+                continue
+            line = view.line(view.text_point(result["line_nr"]-1, 0))
+            regions.append(line)
+
+    view.add_regions(COALA_KEY, regions, COALA_KEY, "dot", region_flag)
+
+
 class CoalaCommand(sublime_plugin.TextCommand):
     """
     The CoalaCommand inherits the TextCommand from sublime_plugin and can be
