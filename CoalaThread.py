@@ -87,6 +87,7 @@ class CoalaThread(threading.Thread):
             else:
                 log("No results for the file")
         elif retval == 0:
+            sublime.set_timeout(self.no_output)
             log("No issues found")
         else:
             log("Exited with:", retval)
@@ -100,3 +101,6 @@ class CoalaThread(threading.Thread):
         # views, and is only for this view.
         self.view.settings().set(COALA_KEY + ".output", output)
         self.callback(self.view)
+
+    def no_output(self):
+        self.view.erase_regions(COALA_KEY)
