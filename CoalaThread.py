@@ -5,7 +5,7 @@ import sublime
 import tempfile
 import subprocess
 
-from .Utils import log
+from .Utils import log, COALA_KEY
 
 
 class CoalaThread(threading.Thread):
@@ -17,11 +17,11 @@ class CoalaThread(threading.Thread):
                  extra_args=[]):
         """
         Creates a thread that runs coala on the sublime view and finally runs
-        the callback with the view.
+        the callback with the view as an argument.
 
         :param view:        The view to run coala on.
         :param callback:    The function to run after running coala - gives
-                            the view and output as arguments.
+                            the view as argument.
         :paran cwd:         The current working directory to set before
                             running coala.
         :param config_file: The config file to use for coala.
@@ -84,4 +84,7 @@ class CoalaThread(threading.Thread):
     def process_output(self, output_str):
         view_id = self.view.id()
         output = json.loads(output_str)
-        self.callback(self.view, output)
+        # Save output to the view's setting - the setting is not common to all
+        # views, and is only for this view.
+        self.view.settings().set(COALA_KEY + ".output", output)
+        self.callback(self.view)

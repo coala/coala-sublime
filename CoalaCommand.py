@@ -4,7 +4,11 @@ from .CoalaThread import CoalaThread
 from .Utils import log, COALA_KEY
 
 
-def show_output(view, output):
+def show_output(view):
+    output = view.settings().get(COALA_KEY + ".output")
+    if not output:
+        return
+
     region_flag = sublime.DRAW_OUTLINED
     regions = []
 
