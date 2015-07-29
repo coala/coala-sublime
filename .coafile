@@ -1,5 +1,5 @@
 [Default]
-files = *.py, bears/**/*.py, coalib/**/*.py, ./coala
+files = **/*.py
 bears = SpaceConsistencyBear, LineLengthBear
 use_spaces = True
 max_line_length = 80
