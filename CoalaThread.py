@@ -96,10 +96,10 @@ class CoalaThread(threading.Thread):
 
     def process_output(self, output_str):
         view_id = self.view.id()
-        output = json.loads(output_str)
         # Save output to the view's setting - the setting is not common to all
-        # views, and is only for this view.
-        self.view.settings().set(COALA_KEY + ".output", output)
+        # views, and is only for this view. Save the string as the Hash of
+        # results cannot be saved by sublime as the int it too large.
+        self.view.settings().set(COALA_KEY + ".output_str", output_str)
         self.callback(self.view)
 
     def no_output(self):

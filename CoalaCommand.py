@@ -1,23 +1,27 @@
 import sublime_plugin
 import sublime
+import json
 from .CoalaThread import CoalaThread
 from .Utils import log, COALA_KEY
 
 
 def show_output(view):
-    output = view.settings().get(COALA_KEY + ".output")
-    if not output:
+    output_str = view.settings().get(COALA_KEY + ".output_str")
+    if not output_str:
         return
+    output = json.loads(output_str)
 
     region_flag = sublime.DRAW_OUTLINED
     regions = []
 
     for section_name, section_results in output["results"].items():
         for result in section_results:
-            if not isinstance(result["line_nr"], int):
+            if not result["affected_code"]:
                 continue
-            line = view.line(view.text_point(result["line_nr"]-1, 0))
-            regions.append(line)
+            for code_region in result["affected_code"]:
+                line = view.line(
+                    view.text_point(code_region["start"]["line"]-1, 0))
+                regions.append(line)
 
     view.add_regions(COALA_KEY, regions, COALA_KEY, "dot", region_flag)
 

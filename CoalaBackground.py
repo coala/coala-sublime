@@ -1,4 +1,5 @@
 import sublime_plugin
+import json
 from .Utils import log, COALA_KEY
 
 
@@ -8,7 +9,8 @@ class CoalaBackground(sublime_plugin.EventListener):
         Show errors in the status line when the carret/selection moves.
         This assumes that the output from coala are saved in COALA_OUTPUT.
         """
-        output = view.settings().get(COALA_KEY + ".output", {})
+        output_str = view.settings().get(COALA_KEY + ".output_str", "{}")
+        output = json.loads(output_str)
         last_line = view.settings().get(COALA_KEY + ".last_line", -1)
         if output:
             # Get the currently selected line
@@ -21,10 +23,15 @@ class CoalaBackground(sublime_plugin.EventListener):
                 found_result_flag = False
                 for section_name, section_results in output["results"].items():
                     for result in section_results:
-                        if new_selected_line == result["line_nr"] - 1:
-                            msg = result["origin"] + ": " + result["message"]
-                            view.set_status(COALA_KEY, msg)
-                            found_result_flag = True
+                        if not result["affected_code"]:
+                            continue
+                        for code_region in result["affected_code"]:
+                            line = code_region["start"]["line"] - 1
+                            if new_selected_line == line:
+                                msg = (result["origin"] + ": "
+                                       + result["message"])
+                                view.set_status(COALA_KEY, msg)
+                                found_result_flag = True
 
                 if view.get_status(COALA_KEY) and not found_result_flag:
                     view.erase_status(COALA_KEY)
