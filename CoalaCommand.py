@@ -32,6 +32,7 @@ class CoalaCommand(sublime_plugin.TextCommand):
     executed using `view.run_command("coala")` - which executes the `run()`
     function by default.
     """
+
     def run(self, edit, **kwargs):
         file_name = self.view.file_name()
         log("Trying to run coala on", file_name)

@@ -4,6 +4,7 @@ from Utils import log, retrieve_stdout
 
 
 class UtilsTest(unittest.TestCase):
+
     def test_retrieve_stdout(self):
         with retrieve_stdout() as sio:
             print("test")

@@ -4,6 +4,7 @@ from .Utils import log, COALA_KEY
 
 
 class CoalaBackground(sublime_plugin.EventListener):
+
     def on_selection_modified(self, view):
         """
         Show errors in the status line when the carret/selection moves.
