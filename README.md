@@ -8,16 +8,27 @@ sublime-text-3 is the only supported version of sublime-text.
 INSTALLATION
 ============
 
-To install `coala-sublime` clone this repository to sublime-text's
-Package directotry. The Package directory can be opened using
-the "Preferences - Browse Packages" option in sublime-text's
-command pallete or through the "Preferences" > "Browse Packages".
+### Dependencies
+ - [coala](https://github.com/coala-analyzer/coala) needs to be
+   installed and the coala binaries should be added to the PATH
+
+### Package control
+For easy installation, use Package Control to install the plugin.
+We're available in PackageControl under the name
+[coala](https://packagecontrol.io/packages/coala).
+
+### Manual installation
+To install `coala-sublime` manually, clone this repository to
+sublime-text's Package directotry. The Package directory can
+be opened using the "Preferences - Browse Packages" option
+in sublime-text's command pallete or through the
+"Preferences" > "Browse Packages".
 
 AUTHORS
 =======
 
-Abdeali J Kothari - <abdealikothari@gmail.com>
-Lasse Schuirmann - <lasse.schuirmann@gmail.com>
+ - Abdeali J Kothari - <abdealikothari@gmail.com>
+ - Lasse Schuirmann - <lasse.schuirmann@gmail.com>
 
 If you have any questions regarding the plugin, don't hesitate
 to create an issue or send us an email.
