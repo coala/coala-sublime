@@ -62,7 +62,7 @@ class CoalaThread(threading.Thread):
         else:
             options.append('--find-config')
 
-        options.append('--files=%s' % self.file_name)
+        options.append('--limit-files=%s' % self.file_name)
         options.append('-S=autoapply=false')
         options.extend(self.extra_args)
         command.extend(options)
