@@ -19,7 +19,7 @@ We're available in PackageControl under the name
 
 ### Manual installation
 To install `coala-sublime` manually, clone this repository to
-sublime-text's Package directotry. The Package directory can
+sublime-text's Package directory. The Package directory can
 be opened using the "Preferences - Browse Packages" option
 in sublime-text's command pallete or through the
 "Preferences" > "Browse Packages".
