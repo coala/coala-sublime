@@ -49,7 +49,7 @@ class CoalaThread(threading.Thread):
         now = time.time()
         timeout_seconds = datetime.timedelta(minutes=2).total_seconds()
         if running and now - running < timeout_seconds:
-            log("Earler coala thread still running since", running,
+            log("Earlier coala thread still running since", running,
                 "for", now - running)
             return
 
