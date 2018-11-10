@@ -1,9 +1,9 @@
-[Default]
+[all]
 files = **/*.py
 bears = SpaceConsistencyBear, LineLengthBear, GitCommitBear, PEP8Bear
 use_spaces = True
 max_line_length = 80
 
-[yml]
+[all.yml]
 bears = YAMLLintBears
 files = **.yml
